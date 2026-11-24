@@ -169,6 +169,7 @@ export const createCheckoutPayment = createServerFn({ method: "POST" })
     }
 
     const order = result.data;
+    console.log("PIX_DIAGNOSTICO", JSON.stringify({ campos: Object.keys(order), status: order.status, temId: Boolean(order.id), camposPix: Object.keys(order.pix ?? {}), temQrCode: Boolean(order.pix?.qrCode) }));
     const accessToken = signOrderAccessToken(order.id, data.buyer.email);
     const amountNumber =
       typeof order.amount === "number"
