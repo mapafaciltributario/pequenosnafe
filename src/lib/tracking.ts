@@ -19,6 +19,7 @@ declare global {
     _fbq?: unknown;
     __pnfMetaPixelLoaded?: boolean;
     __pnfLowTrackLoaded?: boolean;
+    pixelId?: string;
   }
 }
 
@@ -127,6 +128,7 @@ export function initMarketingScripts(): void {
   )?.trim();
   if (lowTrackPixelUrl && !window.__pnfLowTrackLoaded) {
     window.__pnfLowTrackLoaded = true;
+    window.pixelId = import.meta.env["VITE_LOWTRACK_PIXEL_ID"] as string;
     const script = document.createElement("script");
     script.async = true;
     script.src = lowTrackPixelUrl;
